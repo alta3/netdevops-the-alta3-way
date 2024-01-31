@@ -195,7 +195,7 @@
         device:
           name: "home-network"
         interface: "port"
-    connections:
+    cables:
       - side_a_device: "edge-1"
         side_a_type: "device"
         side_a_name: "GigabitEthernet0/0"
@@ -430,7 +430,7 @@
               object_id: "{{ interface_ids[item.side_b_device + '.' + item.side_b_name] | int }}"
           status: "connected"
           # Add additional fields as needed
-      loop: "{{ connections }}"
+      loop: "{{ cables }}"
 
     - name: Create Cables
       uri:
