@@ -1,0 +1,7 @@
+# this is a shell script which will be sourced at boot
+hostname alpine-0
+echo "127.0.0.1   alpine-0" >>/etc/hosts
+USERNAME=cisco
+PASSWORD=cisco
+ip addr add 10.10.1.11/24 dev eth0
+ip route add default via 10.10.1.1
