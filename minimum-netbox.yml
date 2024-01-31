@@ -151,27 +151,27 @@
         name: "port"
         type: "1000base-t"
     ip_addresses:
-      - address: "10.10.2.1/24"
+      - address: "172.20.2.1/24"
         device:
           name: "edge-1"
         interface: "GigabitEthernet0/0"
-      - address: "10.10.1.1/24"
+      - address: "172.20.1.1/24"
         device:
           name: "edge-1"
         interface: "GigabitEthernet0/1"
-      - address: "10.10.1.11/24"
+      - address: "172.20.1.11/24"
         device:
           name: "alpine-0"
         interface: "eth0"
-      - address: "10.10.0.1/30"
+      - address: "172.20.0.1/30"
         device:
           name: "core-0"
         interface: "GigabitEthernet0/0"
-      - address: "10.10.0.5/30"
+      - address: "172.20.0.5/30"
         device:
           name: "core-0"
         interface: "GigabitEthernet0/1"
-      - address: "10.10.2.11/24"
+      - address: "172.20.2.11/24"
         device:
           name: "alpine-1"
         interface: "eth0"
