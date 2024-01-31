@@ -3,8 +3,8 @@
   hosts: localhost
   gather_facts: no
   vars:
-    netbox_url: "https://netbox-19cb1ef7-acec-4175-a9d1-643f4ea9e910.live.alta3.com/"
-    netbox_token: "f7df7a9d2546ab3b6c1a6e31c7b45e22386a9d50"    
+    netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+    netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"  
     headers:
       Authorization: "Token {{ netbox_token }}"
       Content-Type: "application/json"
