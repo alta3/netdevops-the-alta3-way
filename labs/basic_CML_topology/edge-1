@@ -1,0 +1,101 @@
+hostname edge-1
+!
+boot-start-marker
+boot-end-marker
+!
+no logging console
+!
+no aaa new-model
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+ip dhcp excluded-address 10.10.2.1 10.10.2.10
+!
+ip dhcp pool LAN
+ network 10.10.2.0 255.255.255.0
+ default-router 10.10.2.1 
+!
+no ip domain lookup
+ip domain name alta3.local
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+username cisco privilege 15 secret 9 $9$flVMYhJM6RYgZP$sj0qdDTLmTcnFHwyrT/B0zJNwtXkxfd0JGL1f.31zXc
+!
+redundancy
+!
+interface Loopback0
+ ip address 172.31.255.2 255.255.255.255
+!
+interface GigabitEthernet0/0
+ description LAN
+ ip address 10.10.2.1 255.255.255.0
+ duplex auto
+ speed auto
+ media-type rj45
+ no mop enabled
+!
+interface GigabitEthernet0/1
+ description WAN
+ ip address 10.10.0.6 255.255.255.252
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/3
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.10.0.5
+ip ssh version 2
+!
+ipv6 ioam timestamp
+!
+control-plane
+!
+banner exec ^CC
+*****************************************
+* Wilkommen meinen kleine exec student! *
+*****************************************^C
+banner incoming ^CC
+*********************************************
+* Wilkommen meinen kleine incoming student! *
+*********************************************^C
+banner login ^CC
+******************************************
+* Wilkommen meinen kleine login student! *
+******************************************^C
+!
+line con 0
+ exec-timeout 0 0
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+no scheduler allocate
+!
+end
