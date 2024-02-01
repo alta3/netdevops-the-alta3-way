@@ -1,0 +1,1147 @@
+annotations:
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#808080FF'
+    rotation: 0
+    text_bold: false
+    text_content: ''
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -440.0
+    y1: -200.0
+    z_index: 0
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#34FF00FF'
+    rotation: 0
+    text_bold: false
+    text_content: 172.20.0.0/30
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -493.11125078566926
+    y1: -66.51162790697673
+    z_index: 1
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#FF6B00FF'
+    rotation: 0
+    text_bold: false
+    text_content: 172.20.0.4/30
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -329.26461345066
+    y1: -67.20301697045879
+    z_index: 1
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#00CDFFFF'
+    rotation: 0
+    text_bold: false
+    text_content: 172.20.2.0/24
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -95.65053425518542
+    y1: -63.695788812067946
+    z_index: 1
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#FF00D6FF'
+    rotation: 0
+    text_bold: false
+    text_content: 172.20.1.0/24
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -733.8026398491514
+    y1: -68.86235072281589
+    z_index: 1
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#FF00D6FF'
+    rotation: 0
+    text_bold: false
+    text_content: '.1'
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -553.9534883720927
+    y1: -179.9999999999999
+    z_index: 1
+  - border_color: '#FF000000'
+    border_style: ''
+    color: '#FF00D6FF'
+    rotation: 0
+    text_bold: false
+    text_content: '.11'
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -602.5015713387802
+    y1: -256.65619107479534
+    z_index: 1
+  - border_color: '#808080FF'
+    border_style: ''
+    color: '#FFFFFFFF'
+    line_end: arrow
+    line_start: null
+    thickness: 1
+    type: line
+    x1: -544.250000000001
+    y1: -160.64771075581382
+    x2: -544.250000000001
+    y2: -139.71747819767435
+    z_index: 2
+  - border_color: '#808080FF'
+    border_style: ''
+    color: '#FFFFFFFF'
+    line_end: arrow
+    line_start: null
+    thickness: 1
+    type: line
+    x1: -612.6220930232568
+    y1: -247.15933866279073
+    x2: -636.808139534885
+    y2: -247.15933866279062
+    z_index: 2
+  - border_color: '#808080FF'
+    border_style: ''
+    color: '#FFFFFFFF'
+    line_end: arrow
+    line_start: null
+    thickness: 1
+    type: line
+    x1: -496.8081395348852
+    y1: -158.78724563953486
+    x2: -496.808139534885
+    y2: -140.1825944767441
+    z_index: 2
+  - border_color: '#808080FF'
+    border_style: ''
+    color: '#FFFFFFFF'
+    line_end: arrow
+    line_start: null
+    thickness: 1
+    type: line
+    x1: -175.41279069767594
+    y1: -158.78724563953486
+    x2: -175.41279069767577
+    y2: -140.1825944767441
+    z_index: 2
+  - border_color: '#808080FF'
+    border_style: ''
+    color: '#FFFFFFFF'
+    line_end: arrow
+    line_start: null
+    thickness: 1
+    type: line
+    x1: -222.85465116279227
+    y1: -161.1128270348836
+    x2: -222.85465116279204
+    y2: -142.50817587209286
+    z_index: 2
+  - border_color: '#808080FF'
+    border_style: ''
+    color: '#FFFFFFFF'
+    line_end: arrow
+    line_start: null
+    thickness: 1
+    type: line
+    x1: -113.5523255813968
+    y1: -249.9500363372092
+    x2: -86.57558139535018
+    y2: -249.48492005813944
+    z_index: 2
+  - border_color: '#FF000000'
+    border_style: ''
+    color: '#00CDFFFF'
+    rotation: 0
+    text_bold: false
+    text_content: '.11'
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -140.4651162790696
+    y1: -258.6046511627902
+    z_index: 1
+  - border_color: '#FF000000'
+    border_style: ''
+    color: '#00CDFFFF'
+    rotation: 0
+    text_bold: false
+    text_content: '.1'
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -184.7894406033939
+    y1: -181.72218730358205
+    z_index: 1
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#FF6B00FF'
+    rotation: 0
+    text_bold: false
+    text_content: '.6'
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -235.0471401634194
+    y1: -180.8673790069138
+    z_index: 1
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#34FF00FF'
+    rotation: 0
+    text_bold: false
+    text_content: '.2'
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -506.5116279069767
+    y1: -180.46511627906972
+    z_index: 1
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#34FF00FF'
+    rotation: 0
+    text_bold: false
+    text_content: '.1'
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -398.6046511627906
+    y1: -180.46511627906972
+    z_index: 1
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#FF6B00FF'
+    rotation: 0
+    text_bold: false
+    text_content: '.5'
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -344.6511627906978
+    y1: -180.93023255813938
+    z_index: 1
+  - border_color: '#808080FF'
+    border_style: ''
+    color: '#FFFFFFFF'
+    line_end: arrow
+    line_start: null
+    thickness: 1
+    type: line
+    x1: -334.4825581395364
+    y1: -159.71747819767427
+    x2: -334.4825581395362
+    y2: -141.11282703488354
+    z_index: 2
+  - border_color: '#808080FF'
+    border_style: ''
+    color: '#FFFFFFFF'
+    line_end: arrow
+    line_start: null
+    thickness: 1
+    type: line
+    x1: -385.1802325581411
+    y1: -160.6477107558138
+    x2: -385.18023255814086
+    y2: -142.04305959302306
+    z_index: 2
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#FC002AFF'
+    rotation: 0
+    text_bold: false
+    text_content: 10.0.0.82
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -403.6361118936086
+    y1: -221.78891111994014
+    z_index: 3
+nodes:
+  - boot_disk_size: null
+    configuration: |-
+      Building configuration...
+
+
+      Current configuration : 2093 bytes
+      !
+      ! Last configuration change at 04:08:46 UTC Fri Jan 26 2024
+      !
+      version 15.9
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname edge-1
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      no logging console
+      !
+      no aaa new-model
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      ip dhcp excluded-address 172.20.2.1 10.10.2.10
+      !
+      ip dhcp pool LAN
+       network 172.20.2.0 255.255.255.0
+       default-router 172.20.2.1
+      !
+      no ip domain lookup
+      ip domain name alta3.local
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      username cisco privilege 15 secret 9 $9$flVMYhJM6RYgZP$sj0qdDTLmTcnFHwyrT/B0zJNwtXkxfd0JGL1f.31zXc
+      !
+      redundancy
+      !
+      interface Loopback0
+       ip address 172.31.255.2 255.255.255.255
+      !
+      interface GigabitEthernet0/0
+       description LAN
+       ip address 172.20.2.1 255.255.255.0
+       duplex auto
+       speed auto
+       media-type rj45
+       no mop enabled
+      !
+      interface GigabitEthernet0/1
+       description WAN
+       ip address 172.20.0.6 255.255.255.252
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/2
+       no ip address
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/3
+       no ip address
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      ip route 0.0.0.0 0.0.0.0 172.20.0.5
+      ip ssh version 2
+      !
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec ^CC
+      *****************************************
+      * Wilkommen meinen kleine exec student! *
+      *****************************************^C
+      banner incoming ^CC
+      *********************************************
+      * Wilkommen meinen kleine incoming student! *
+      *********************************************^C
+      banner login ^CC
+      ******************************************
+      * Wilkommen meinen kleine login student! *
+      ******************************************^C
+      !
+      line con 0
+       exec-timeout 0 0
+      line aux 0
+      line vty 0 4
+       exec-timeout 0 0
+       login local
+       transport input ssh
+      line vty 5 15
+       login local
+       transport input ssh
+      !
+      no scheduler allocate
+      !
+      end
+    cpu_limit: 100
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: edge-1
+    node_definition: iosv
+    ram: null
+    tags: []
+    x: -200
+    y: -120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        label: GigabitEthernet0/0
+        slot: 0
+        type: physical
+      - id: i2
+        label: GigabitEthernet0/1
+        slot: 1
+        type: physical
+      - id: i3
+        label: GigabitEthernet0/2
+        slot: 2
+        type: physical
+      - id: i4
+        label: GigabitEthernet0/3
+        slot: 3
+        type: physical
+  - boot_disk_size: null
+    configuration: |-
+      Building configuration...
+
+      Current configuration : 2681 bytes
+      !
+      ! Last configuration change at 00:09:53 UTC Fri Jan 26 2024
+      !
+      version 15.2
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      service compress-config
+      !
+      hostname sw-1
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      no logging console
+      !
+      no aaa new-model
+      !
+      ip cef
+      no ipv6 cef
+      !
+      spanning-tree mode pvst
+      spanning-tree extend system-id
+      !
+      interface GigabitEthernet0/0
+       negotiation auto
+      !
+      interface GigabitEthernet0/1
+       negotiation auto
+      !
+      interface GigabitEthernet0/2
+       negotiation auto
+      !
+      interface GigabitEthernet0/3
+       negotiation auto
+      !
+      ip forward-protocol nd
+      !
+      ip http server
+      ip http secure-server
+      !
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      control-plane
+      !
+      banner exec ^CC
+      IOSv - Cisco Systems Confidential -
+
+      Supplemental End User License Restrictions
+
+      This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+      By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+      ^C
+      banner incoming ^CC
+      IOSv - Cisco Systems Confidential -
+
+      Supplemental End User License Restrictions
+
+      This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+      By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+      ^C
+      banner login ^CC
+      IOSv - Cisco Systems Confidential -
+
+      Supplemental End User License Restrictions
+
+      This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+      By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+      ^C
+      !
+      line con 0
+       exec-timeout 0 0
+      line aux 0
+      line vty 0 4
+       exec-timeout 0 0
+       login
+      !
+      !
+      end
+    cpu_limit: 100
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: sw-1
+    node_definition: iosvl2
+    ram: null
+    tags: []
+    x: -40
+    y: -120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        label: GigabitEthernet0/0
+        slot: 0
+        type: physical
+      - id: i2
+        label: GigabitEthernet0/1
+        slot: 1
+        type: physical
+      - id: i3
+        label: GigabitEthernet0/2
+        slot: 2
+        type: physical
+      - id: i4
+        label: GigabitEthernet0/3
+        slot: 3
+        type: physical
+  - boot_disk_size: null
+    configuration: |-
+      Building configuration...
+
+
+      Current configuration : 2210 bytes
+      !
+      ! Last configuration change at 04:06:24 UTC Fri Jan 26 2024
+      !
+      version 15.9
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname edge-0
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      no logging console
+      !
+      no aaa new-model
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      ip dhcp excluded-address 172.20.1.1 172.20.1.10
+      !
+      ip dhcp pool LAN
+       network 172.20.1.0 255.255.255.0
+       default-router 172.20.1.1
+      !
+      no ip domain lookup
+      ip domain name alta3.local
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      username cisco privilege 15 secret 9 $9$doQnhQtHva2L39$6.Q3VDhk/8mSutMaDCMUz7dLIhylzX94ZDRsPNBCX6s
+      !
+      redundancy
+      !
+      interface Loopback0
+       ip address 172.31.255.1 255.255.255.255
+      !
+      interface GigabitEthernet0/0
+       ip address 172.20.1.1 255.255.255.0
+       duplex auto
+       speed auto
+       media-type rj45
+       no mop enabled
+      !
+      interface GigabitEthernet0/1
+       description demonstrate /30 access to a core router
+       ip address 172.20.0.2 255.255.255.252
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/2
+       no ip address
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/3
+       no ip address
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/4
+       no ip address
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      ip forward-protocol nd
+      !
+      no ip http server
+      no ip http secure-server
+      ip route 0.0.0.0 0.0.0.0 172.20.0.1
+      ip ssh version 2
+      !
+      ipv6 ioam timestamp
+      !
+      control-plane
+      !
+      banner exec ^CC
+      *****************************************
+      * Wilkommen meinen kleine exec student! *
+      *****************************************^C
+      banner incoming ^CC
+      *********************************************
+      * Wilkommen meinen kleine incoming student! *
+      *********************************************^C
+      banner login ^CC
+      ******************************************
+      * Wilkommen meinen kleine login student! *
+      ******************************************^C
+      !
+      line con 0
+       exec-timeout 0 0
+      line aux 0
+      line vty 0 4
+       exec-timeout 0 0
+       login local
+       transport input ssh
+      line vty 5 15
+       login local
+       transport input ssh
+      !
+      no scheduler allocate
+      !
+      end
+    cpu_limit: 100
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: edge-0
+    node_definition: iosv
+    ram: null
+    tags: []
+    x: -520
+    y: -120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        label: GigabitEthernet0/0
+        slot: 0
+        type: physical
+      - id: i2
+        label: GigabitEthernet0/1
+        slot: 1
+        type: physical
+      - id: i3
+        label: GigabitEthernet0/2
+        slot: 2
+        type: physical
+      - id: i4
+        label: GigabitEthernet0/3
+        slot: 3
+        type: physical
+      - id: i5
+        label: GigabitEthernet0/4
+        slot: 4
+        type: physical
+  - boot_disk_size: null
+    configuration: |-
+      # this is a shell script which will be sourced at boot
+      hostname alpine-0
+      echo "127.0.0.1   alpine-0" >>/etc/hosts
+      USERNAME=cisco
+      PASSWORD=cisco
+      ip addr add 172.20.1.11/24 dev eth0
+      ip route add default via 172.20.1.1
+    cpu_limit: 100
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: alpine-0
+    node_definition: alpine
+    ram: null
+    tags: []
+    x: -680
+    y: -280
+    interfaces:
+      - id: i0
+        label: eth0
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration: |-
+      # this is a shell script which will be sourced at boot
+      hostname alpine-1
+      echo "127.0.0.1   alpine-1" >>/etc/hosts
+      USERNAME=cisco
+      PASSWORD=cisco
+      ip addr add 172.20.2.11/24 dev eth0
+      ip route add default via 172.20.2.1
+    cpu_limit: 100
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n4
+    image_definition: null
+    label: alpine-1
+    node_definition: alpine
+    ram: null
+    tags: []
+    x: -40
+    y: -280
+    interfaces:
+      - id: i0
+        label: eth0
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration: |-
+      Building configuration...
+
+      Current configuration : 2693 bytes
+      !
+      ! Last configuration change at 23:55:41 UTC Thu Jan 25 2024
+      !
+      version 15.2
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      service compress-config
+      !
+      hostname inserthostname-here
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      no logging console
+      !
+      no aaa new-model
+      !
+      ip cef
+      no ipv6 cef
+      !
+      spanning-tree mode pvst
+      spanning-tree extend system-id
+      !
+      interface GigabitEthernet0/0
+       negotiation auto
+      !
+      interface GigabitEthernet0/1
+       negotiation auto
+      !
+      interface GigabitEthernet0/2
+       negotiation auto
+      !
+      interface GigabitEthernet0/3
+       negotiation auto
+      !
+      ip forward-protocol nd
+      !
+      ip http server
+      ip http secure-server
+      !
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      control-plane
+      !
+      banner exec ^C
+      IOSv - Cisco Systems Confidential -
+
+      Supplemental End User License Restrictions
+
+      This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+      By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+      ^C
+      banner incoming ^C
+      IOSv - Cisco Systems Confidential -
+
+      Supplemental End User License Restrictions
+
+      This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+      By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+      ^C
+      banner login ^C
+      IOSv - Cisco Systems Confidential -
+
+      Supplemental End User License Restrictions
+
+      This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+      By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+      ^C
+      !
+      line con 0
+       exec-timeout 0 0
+      line aux 0
+      line vty 0 4
+       exec-timeout 0 0
+       login
+      !
+      !
+      end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n5
+    image_definition: null
+    label: sw-0
+    node_definition: iosvl2
+    ram: null
+    tags: []
+    x: -680
+    y: -120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        label: GigabitEthernet0/0
+        slot: 0
+        type: physical
+      - id: i2
+        label: GigabitEthernet0/1
+        slot: 1
+        type: physical
+      - id: i3
+        label: GigabitEthernet0/2
+        slot: 2
+        type: physical
+      - id: i4
+        label: GigabitEthernet0/3
+        slot: 3
+        type: physical
+  - boot_disk_size: null
+    configuration: |-
+      Building configuration...
+
+
+      Current configuration : 3349 bytes
+      !
+      ! Last configuration change at 04:07:03 UTC Fri Jan 26 2024
+      !
+      version 15.9
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname core-0
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      no logging console
+      !
+      no aaa new-model
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      ip domain name alta3.local
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      username cisco privilege 15 secret 9 $9$QiONXvLumgpUTv$.HZlS6w/a2YiMcbNButT0Sku9mp9fhlmjYS/iZZb1HU
+      !
+      redundancy
+      !
+      interface GigabitEthernet0/0
+       ip address 172.20.0.1 255.255.255.252
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       ip address 172.20.0.5 255.255.255.252
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/2
+       ip address 10.0.0.82 255.240.0.0
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/3
+       no ip address
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      ip forward-protocol nd
+      !
+      no ip http server
+      no ip http secure-server
+      ip route 0.0.0.0 0.0.0.0 10.0.0.1
+      ip route 172.20.1.0 255.255.255.0 172.20.0.2
+      ip route 172.20.2.0 255.255.255.0 172.20.0.6
+      ip ssh version 2
+      !
+      ipv6 ioam timestamp
+      !
+      control-plane
+      !
+      banner exec ^CC
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************^C
+      banner incoming ^CC
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************^C
+      banner login ^CC
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************^C
+      !
+      line con 0
+       exec-timeout 0 0
+      line aux 0
+      line vty 0 4
+       exec-timeout 0 0
+       login local
+       transport input ssh
+      line vty 5 15
+       login local
+       transport input ssh
+      !
+      no scheduler allocate
+      !
+      end
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n6
+    image_definition: null
+    label: core-0
+    node_definition: iosv
+    ram: null
+    tags: []
+    x: -362
+    y: -120
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        label: GigabitEthernet0/0
+        slot: 0
+        type: physical
+      - id: i2
+        label: GigabitEthernet0/1
+        slot: 1
+        type: physical
+      - id: i3
+        label: GigabitEthernet0/2
+        slot: 2
+        type: physical
+      - id: i4
+        label: GigabitEthernet0/3
+        slot: 3
+        type: physical
+  - boot_disk_size: null
+    configuration: System Bridge
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n7
+    image_definition: null
+    label: home-network
+    node_definition: external_connector
+    ram: null
+    tags: []
+    x: -360
+    y: -498
+    interfaces:
+      - id: i0
+        label: port
+        slot: 0
+        type: physical
+links:
+  - id: l0
+    n1: n5
+    n2: n2
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: sw-0-GigabitEthernet0/0<->edge-0-GigabitEthernet0/0
+  - id: l1
+    n1: n3
+    n2: n5
+    i1: i0
+    i2: i2
+    conditioning: {}
+    label: alpine-0-eth0<->sw-0-GigabitEthernet0/1
+  - id: l2
+    n1: n2
+    n2: n6
+    i1: i2
+    i2: i1
+    conditioning: {}
+    label: edge-0-GigabitEthernet0/1<->core-0-GigabitEthernet0/0
+  - id: l3
+    n1: n0
+    n2: n6
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: edge-1-GigabitEthernet0/1<->core-0-GigabitEthernet0/1
+  - id: l4
+    n1: n0
+    n2: n1
+    i1: i1
+    i2: i1
+    conditioning: {}
+    label: edge-1-GigabitEthernet0/0<->sw-1-GigabitEthernet0/0
+  - id: l5
+    n1: n1
+    n2: n4
+    i1: i2
+    i2: i0
+    conditioning: {}
+    label: sw-1-GigabitEthernet0/1<->alpine-1-eth0
+  - id: l6
+    n1: n7
+    n2: n6
+    i1: i0
+    i2: i3
+    conditioning: {}
+    label: home-network-port<->core-0-GigabitEthernet0/2
+lab:
+  description: Building the lab that we'll use for many labs.
+  notes: |-
+    # IOSv Feature Testing
+
+    ## Features
+
+    - CDP
+    - ping
+    - OSPF single-area
+    - NAT - static
+    - HSRP
+    - DHCP
+    - Routed subinterface
+
+    ## Test Details
+
+    For more details on test procedure, see the [IOSv](https://developer.cisco.com/docs/modeling-labs/#!iosv) page in the [CML documentation](https://developer.cisco.com/docs/modeling-labs/).
+  title: SSH Access
+  version: 0.2.1
