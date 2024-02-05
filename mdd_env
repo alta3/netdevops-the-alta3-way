@@ -1,0 +1,5 @@
+export CML_HOST="10.0.0.82"
+export CML_USERNAME="admin"
+export CML_PASSWORD="alta3123"
+export CML_LAB_FILE="$HOME/topo.yml"
+export CML_VERIFY_CERT="false"
