@@ -1,0 +1,17 @@
+- name: My Cisco Playbook
+  hosts: edge-0
+  gather_facts: false
+
+  vars:
+    ansible_become: yes
+    ansible_become_method: enable
+
+  tasks:
+  - name: configure the login banner
+    cisco.ios.ios_banner:
+      banner: login
+      text: |
+        Congrats! You set a banner using an Ansible IOS module.
+        Notice how YAML formatting lets us do multi-line
+        strings
+      state: present
