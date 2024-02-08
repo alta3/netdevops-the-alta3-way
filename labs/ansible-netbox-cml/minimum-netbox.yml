@@ -1,0 +1,441 @@
+---
+- name: Populate NetBox with CML Topology Data
+  hosts: localhost
+  gather_facts: no
+  vars:
+    netbox_url: "{{ lookup('env', 'NB_API_URL') }}"
+    netbox_token: "{{ lookup('env', 'NB_API_TOKEN') }}"      
+    headers:
+      Authorization: "Token {{ netbox_token }}"
+      Content-Type: "application/json"
+    sites:
+      - name: "Alta3-Site"
+        slug: "alta3-site"
+    manufacturers:
+      - name: "Cisco"
+        slug: "cisco"
+      - name: "Generic"
+        slug: "generic"
+    device_roles:
+      - name: "Router"
+        slug: "router"
+      - name: "Switch"
+        slug: "switch"
+      - name: "Server"
+        slug: "server"
+    device_types:
+      - model: "Cisco ISR 4000"
+        slug: "cisco-isr-4000"
+        manufacturer:
+          name: "Cisco"
+      - model: "Cisco Catalyst 9000"
+        slug: "cisco-cat-9000"
+        manufacturer:
+          name: "Cisco"
+      - model: "Generic Linux Server"
+        slug: "gen-linux-server"
+        manufacturer:
+          name: "Generic"
+    devices:
+      - name: "edge-1"
+        device_type:
+          model: "Cisco ISR 4000"
+        site:
+          name: "Alta3-Site"
+        role:
+          name: "Router"
+      - name: "sw-1"
+        device_type:
+          model: "Cisco Catalyst 9000"
+        site:
+          name: "Alta3-Site"
+        role:
+          name: "Switch"
+      - name: "alpine-0"
+        device_type:
+          model: "Generic Linux Server"
+        site:
+          name: "Alta3-Site"
+        role:
+          name: "Server"
+      - name: "edge-0"
+        device_type:
+          model: "Cisco ISR 4000"
+        site:
+          name: "Alta3-Site"
+        role:
+          name: "Router"
+      - name: "core-0"
+        device_type:
+          model: "Cisco ISR 4000"
+        site:
+          name: "Alta3-Site"
+        role:
+          name: "Router"
+      - name: "sw-0"
+        device_type:
+          model: "Cisco Catalyst 9000"
+        site:
+          name: "Alta3-Site"
+        role:
+          name: "Switch"
+      - name: "alpine-1"
+        device_type:
+          model: "Generic Linux Server"
+        site:
+          name: "Alta3-Site"
+        role:
+          name: "Server"
+      - name: "home-network"
+        device_type:
+          model: "Generic Linux Server"
+        site:
+          name: "Alta3-Site"
+        role:
+          name: "Server"
+    interfaces:
+      - device:
+          name: "edge-1"
+        name: "GigabitEthernet0/0"
+        type: "1000base-t"
+      - device:
+          name: "edge-1"
+        name: "GigabitEthernet0/1"
+        type: "1000base-t"
+      - device:
+          name: "sw-1"
+        name: "GigabitEthernet0/0"
+        type: "1000base-t"
+      - device:
+          name: "sw-1"
+        name: "GigabitEthernet0/1"
+        type: "1000base-t"
+      - device:
+          name: "alpine-0"
+        name: "eth0"
+        type: "1000base-t"
+      - device:
+          name: "edge-0"
+        name: "GigabitEthernet0/0"
+        type: "100base-t1"
+      - device:
+          name: "edge-0"
+        name: "GigabitEthernet0/1"
+        type: "100base-t1"
+      - device:
+          name: "core-0"
+        name: "GigabitEthernet0/0"
+        type: "100base-t1"
+      - device:
+          name: "core-0"
+        name: "GigabitEthernet0/1"
+        type: "100base-t1"
+      - device:
+          name: "core-0"
+        name: "GigabitEthernet0/2"
+        type: "100base-t1"
+      - device:
+          name: "sw-0"
+        name: "GigabitEthernet0/0"
+        type: "100base-t1"
+      - device:
+          name: "sw-0"
+        name: "GigabitEthernet0/1"
+        type: "100base-t1"
+      - device:
+          name: "alpine-1"
+        name: "eth0"
+        type: "1000base-t"
+      - device:
+          name: "home-network"
+        name: "port"
+        type: "1000base-t"
+    ip_addresses:
+      - address: "172.20.2.1/24"
+        device:
+          name: "edge-1"
+        interface: "GigabitEthernet0/0"
+      - address: "172.20.1.1/24"
+        device:
+          name: "edge-1"
+        interface: "GigabitEthernet0/1"
+      - address: "172.20.1.11/24"
+        device:
+          name: "alpine-0"
+        interface: "eth0"
+      - address: "172.20.0.1/30"
+        device:
+          name: "core-0"
+        interface: "GigabitEthernet0/0"
+      - address: "172.20.0.5/30"
+        device:
+          name: "core-0"
+        interface: "GigabitEthernet0/1"
+      - address: "172.20.2.11/24"
+        device:
+          name: "alpine-1"
+        interface: "eth0"
+      - address: "192.168.1.1/24"
+        device:
+          name: "sw-1"
+        interface: "GigabitEthernet0/0"
+      - address: "192.168.1.2/24"
+        device:
+          name: "sw-1"
+        interface: "GigabitEthernet0/1"
+      - address: "192.168.2.1/24"
+        device:
+          name: "sw-0"
+        interface: "GigabitEthernet0/0"
+      - address: "192.168.2.2/24"
+        device:
+          name: "sw-0"
+        interface: "GigabitEthernet0/1"
+      - address: "192.168.3.1/24"
+        device:
+          name: "home-network"
+        interface: "port"
+    cables:
+      - side_a_device: "edge-1"
+        side_a_type: "device"
+        side_a_name: "GigabitEthernet0/0"
+        side_b_device: "sw-1"
+        side_b_type: "device"
+        side_b_name: "GigabitEthernet0/0"
+      - side_a_device: "edge-1"
+        side_a_type: "device"
+        side_a_name: "GigabitEthernet0/1"
+        side_b_device: "core-0"
+        side_b_type: "device"
+        side_b_name: "GigabitEthernet0/1"
+      - side_a_device: "edge-0"
+        side_a_type: "device"
+        side_a_name: "GigabitEthernet0/0"
+        side_b_device: "sw-0"
+        side_b_type: "device"
+        side_b_name: "GigabitEthernet0/0"
+      - side_a_device: "edge-0"
+        side_a_type: "device"
+        side_a_name: "GigabitEthernet0/1"
+        side_b_device: "core-0"
+        side_b_type: "device"
+        side_b_name: "GigabitEthernet0/0"
+      - side_a_device: "sw-1"
+        side_a_type: "device"
+        side_a_name: "GigabitEthernet0/1"
+        side_b_device: "alpine-1"
+        side_b_type: "device"
+        side_b_name: "eth0"
+      - side_a_device: "sw-0"
+        side_a_type: "device"
+        side_a_name: "GigabitEthernet0/1"
+        side_b_device: "alpine-0"
+        side_b_type: "device"
+        side_b_name: "eth0"
+      - side_a_device: "core-0"
+        side_a_type: "device"
+        side_a_name: "GigabitEthernet0/2"
+        side_b_device: "home-network"
+        side_b_type: "device"
+        side_b_name: "port"
+    construct_cable: >
+      {{
+        lambda x: {
+          'termination_a_type': 'dcim.interface',
+          'termination_a_id': interface_map[x.side_a_device + '.' + x.side_a_name],
+          'termination_b_type': 'dcim.interface',
+          'termination_b_id': interface_map[x.side_b_device + '.' + x.side_b_name]
+        }
+      }}
+
+  tasks:
+    - name: Check if Manufacturer Exists
+      uri:
+        url: "{{ netbox_url }}/api/dcim/manufacturers/"
+        method: GET
+        headers: "{{ headers }}"
+      register: manufacturer_check
+      changed_when: false
+      ignore_errors: yes
+
+    - name: Create Manufacturers
+      uri:
+        url: "{{ netbox_url }}/api/dcim/manufacturers/"
+        method: POST
+        body: "{{ item | to_json }}"
+        headers: "{{ headers }}"
+        status_code: 201
+      loop: "{{ manufacturers }}"
+      when: "manufacturer_check.json.count == 0"
+
+    - name: Check if Site Exists
+      uri:
+        url: "{{ netbox_url }}/api/dcim/sites/"
+        method: GET
+        headers: "{{ headers }}"
+      register: site_check
+      changed_when: false
+      ignore_errors: yes
+    - name: Create Sites
+      uri:
+        url: "{{ netbox_url }}/api/dcim/sites/"
+        method: POST
+        body: "{{ item | to_json }}"
+        headers: "{{ headers }}"
+        status_code: 201
+      loop: "{{ sites }}"
+      when: "site_check.json.count == 0"
+
+    - name: Check if Device Role Exists
+      uri:
+        url: "{{ netbox_url }}/api/dcim/device-roles/"
+        method: GET
+        headers: "{{ headers }}"
+      register: device_role_check
+      changed_when: false
+      ignore_errors: yes
+    - name: Create Device Roles
+      uri:
+        url: "{{ netbox_url }}/api/dcim/device-roles/"
+        method: POST
+        body: "{{ item | to_json }}"
+        headers: "{{ headers }}"
+        status_code: 201
+      loop: "{{ device_roles }}"
+      when: "device_role_check.json.count == 0"
+
+    - name: Check if Device Type Exists
+      uri:
+        url: "{{ netbox_url }}/api/dcim/device-types/"
+        method: GET
+        headers: "{{ headers }}"
+      register: device_type_check
+      changed_when: false
+      ignore_errors: yes
+    - name: Create Device Types
+      uri:
+        url: "{{ netbox_url }}/api/dcim/device-types/"
+        method: POST
+        body: "{{ item | to_json }}"
+        headers: "{{ headers }}"
+        status_code: 201
+      loop: "{{ device_types }}"
+      when: "device_type_check.json.count == 0"
+
+    - name: Check if Device Exists
+      uri:
+        url: "{{ netbox_url }}/api/dcim/devices/"
+        method: GET
+        headers: "{{ headers }}"
+      register: device_check
+      changed_when: false
+      ignore_errors: yes
+    - name: Create Devices
+      uri:
+        url: "{{ netbox_url }}/api/dcim/devices/"
+        method: POST
+        body: "{{ item | to_json }}"
+        headers: "{{ headers }}"
+        status_code: 201
+      loop: "{{ devices }}"
+      when: "device_check.json.count == 0"
+
+    - name: Check if Interface Exists
+      uri:
+        url: "{{ netbox_url }}/api/dcim/interfaces/"
+        method: GET
+        headers: "{{ headers }}"
+      register: interface_check
+      changed_when: false
+      ignore_errors: yes
+    - name: Create Interfaces
+      uri:
+        url: "{{ netbox_url }}/api/dcim/interfaces/"
+        method: POST
+        body: "{{ item | to_json }}"
+        headers: "{{ headers }}"
+        status_code: 201
+      loop: "{{ interfaces }}"
+      when: "interface_check.json.count == 0"
+
+    - name: Check if IP Address Exists
+      uri:
+        url: "{{ netbox_url }}/api/ipam/ip-addresses/"
+        method: GET
+        headers: "{{ headers }}"
+      register: ip_address_check
+      changed_when: false
+      ignore_errors: yes
+    - name: Assign IP Addresses to Interfaces
+      uri:
+        url: "{{ netbox_url }}/api/ipam/ip-addresses/"
+        method: POST
+        body: "{{ item | to_json }}"
+        headers: "{{ headers }}"
+        status_code: 201
+      loop: "{{ ip_addresses }}"
+      when: "ip_address_check.json.count == 0"
+    - name: Check if Cables Exist
+      uri:
+        url: "{{ netbox_url }}/api/dcim/cables/"
+        method: GET
+        headers: "{{ headers }}"
+      register: cable_check
+      ignore_errors: yes
+
+    - name: Fetch Device IDs
+      uri:
+        url: "{{ netbox_url }}/api/dcim/devices/?name={{ item }}"
+        method: GET
+        headers: "{{ headers }}"
+        return_content: yes
+      register: device_fetch
+      loop: "{{ devices | map(attribute='name') | list }}"
+      changed_when: false
+
+    - name: Set Device IDs
+      set_fact:
+        device_ids: "{{ device_ids | default({}) | combine({ item['item']: (item['json']['results'] | first).id }) }}"
+      loop: "{{ device_fetch.results }}"
+      when: item.json.results | length > 0
+
+    - name: Fetch Interface IDs
+      uri:
+        url: "{{ netbox_url }}/api/dcim/interfaces/?device_id={{ device_ids[item.device.name] }}&name={{ item.name }}"
+        method: GET
+        headers: "{{ headers }}"
+        return_content: yes
+      register: interface_fetch
+      loop: "{{ interfaces }}"
+      changed_when: false
+
+    - name: Set Interface IDs
+      set_fact:
+        interface_ids: "{{ interface_ids | default({}) | combine({ item['item']['device']['name'] + '.' + item['item']['name']: (item['json']['results'] | first).id }) }}"
+      loop: "{{ interface_fetch.results }}"
+      when: item.json.results | length > 0
+
+    - name: Construct Cable Data
+      set_fact:
+        constructed_connections: "{{ constructed_connections | default([]) + [construct_cable_item] }}"
+      vars:
+        construct_cable_item:
+          type: "cat3"
+          a_terminations:
+            - object_type: "dcim.interface"
+              object_id: "{{ interface_ids[item.side_a_device + '.' + item.side_a_name] | int }}"
+          b_terminations:
+            - object_type: "dcim.interface"
+              object_id: "{{ interface_ids[item.side_b_device + '.' + item.side_b_name] | int }}"
+          status: "connected"
+          # Add additional fields as needed
+      loop: "{{ cables }}"
+
+    - name: Create Cables
+      uri:
+        url: "{{ netbox_url }}/api/dcim/cables/"
+        method: POST
+        body: "{{ item | to_json }}"
+        headers: "{{ headers }}"
+        status_code: 201
+      loop: "{{ constructed_connections }}"
