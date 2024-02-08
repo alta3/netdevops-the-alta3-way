@@ -1,0 +1,13 @@
+enable
+config t
+access-list 1 permit 172.20.0.0 0.0.255.255
+ip nat inside source list 1 interface GigabitEthernet0/2 overload
+interface GigabitEthernet0/0
+ ip nat inside
+interface GigabitEthernet0/1
+ ip nag inside
+interface GigabitEthernet0/2
+ ip nat outside
+ exit
+exit
+write memory
