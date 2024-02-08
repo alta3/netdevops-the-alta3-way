@@ -1,0 +1,39 @@
+---
+- name: Compare Device Configs with Local Files
+  hosts: cml_devices
+  gather_facts: no
+
+  vars:
+    local_config_dir: "/path/to/local/configs"
+
+  tasks:
+    - name: Fetch configuration from device
+      ios_command:
+        commands:
+          - show running-config
+      register: device_config
+
+    - name: Read local configuration file
+      slurp:
+        src: "{{ local_config_dir }}/{{ inventory_hostname }}.conf"
+      register: local_config
+      ignore_errors: yes
+
+    - name: Compare device configuration with local file
+      block:
+        - name: Convert local config to text
+          set_fact:
+            local_config_text: "{{ local_config['content'] | b64decode }}"
+
+        - name: Check for discrepancies
+          diff:
+            before: "{{ local_config_text }}"
+            after: "{{ device_config.stdout[0] }}"
+          register: config_diff
+          failed_when: false
+
+        - name: Output discrepancies
+          debug:
+            msg: "Discrepancy found in {{ inventory_hostname }}: {{ config_diff.diff }}"
+          when: config_diff.changed
+      when: local_config is not failed
