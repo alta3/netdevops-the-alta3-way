@@ -1,0 +1,41 @@
+---
+- name: Network Commands by Vendor  
+  hosts: all
+  gather_facts: no
+
+  vars:
+    ansible_become: yes
+    ansible_become_method: enable
+
+  tasks:
+    - name: Run Cisco command
+      ios_command:
+        commands: show ip int br
+      when: ansible_network_os == 'ios'
+      register: iresult
+
+    - name: show iresult
+      debug:
+        var: iresult
+
+    - name: Run Cisco NXOS command
+      nxos_command:
+        commands: show ip int br
+      when: ansible_network_os == 'nxos'
+      register: nxresult
+      
+    - name: show nxresult
+      debug:
+        var: nxresult
+      when: ansible_network_os == 'nxos'
+
+    - name: Run Vyos command
+      vyos_command:
+        commands: show interface
+      when: ansible_network_os == 'vyos'
+      register: vresult
+
+    - name: show vresult
+      debug:
+        var: vresult
+      when: ansible_network_os == 'vyos'
