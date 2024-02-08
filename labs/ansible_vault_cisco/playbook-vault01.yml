@@ -1,0 +1,10 @@
+---
+- name: Secret playbook
+  connection: local
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Print to the screen
+      ansible.builtin.debug:
+        msg: "It's a secret to everybody."
