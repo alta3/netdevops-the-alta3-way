@@ -1,0 +1,21 @@
+Host 10.*
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
+
+Host github.com
+  HostName github.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_rsa_github
+  user git
+
+Host gitlab.com
+  HostName gitlab.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_rsa_gitlab
+  user git
+
+Host core-0
+  Hostname 10.0.0.82
+  User cisco
+  HostKeyAlgorithms +ssh-rsa
+  KexAlgorithms +diffie-hellman-group14-sha1
