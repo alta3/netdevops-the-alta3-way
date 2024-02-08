@@ -1,0 +1,86 @@
+--- iosv-0 Configuration ---
++++ iosv-1 Configuration ---
+@@ -1,6 +1,6 @@
+ hostname iosv-0
+ hostname iosv-1
+ !
+-boot-start-marker
++boot-start-marker
+
+...
+
+ interface GigabitEthernet0/0
+  ip address 192.168.254.1 255.255.255.0
++ ip address 192.168.254.2 255.255.255.0
+  ip nat inside
+  ip virtual-reassembly in
+  duplex auto
+  speed auto
+  media-type rj45
+  no mop enabled
+
+...
+
+-interface GigabitEthernet0/1
++interface GigabitEthernet0/1
+  description to r-csr01 Gi1
+- ip address 192.168.255.1 255.255.255.252
++ ip address 192.168.255.9 255.255.255.252
+  ip nat outside
+  ip virtual-reassembly in
+  duplex auto
+  speed auto
+  media-type rj45
+
+...
+
+-interface GigabitEthernet0/2
++interface GigabitEthernet0/2
+  description to r-iosv1 Gi0/2
+- ip address 192.168.255.5 255.255.255.252
++ ip address 192.168.255.6 255.255.255.252
+  duplex auto
+  speed auto
+  media-type rj45
+
+...
+
+-interface GigabitEthernet0/3.100
++interface GigabitEthernet0/3.100
+  encapsulation dot1Q 100
+- ip address 192.168.253.2 255.255.255.0
++ ip address 192.168.253.3 255.255.255.0
+  standby 1 ip 192.168.253.1
+  standby 1 priority 95
+  standby 1 preempt
+
+...
+
+-router ospf 1
++router ospf 1
+  router-id 172.31.255.1
++ router-id 172.31.255.2
+
+...
+
+-ip nat inside source static 192.168.254.2 172.31.254.2
++ip nat inside source static 192.168.254.2 172.31.254.2
+!
+ipv6 ioam timestamp
+!
+...
+
+-line con 0
++line con 0
+  exec-timeout 0 0
+-line aux 0
++line aux 0
+-line vty 0 4
++line vty 0 4
+  exec-timeout 0 0
+  login
+  transport input none
+!
+no scheduler allocate
+!
+end
