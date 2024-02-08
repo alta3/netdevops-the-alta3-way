@@ -1,0 +1,18 @@
+- name: Check initial topology connectivity
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  
+  vars:
+    ansible_network_os: ios
+
+  tasks:
+    - name: Get facts about a lab in CML
+      cisco.ios.ios_facts:
+        gather_network_resources:
+          - interfaces
+      register: results
+
+    - name: Pick out data and write it to a file
+      debug:
+        var: results
