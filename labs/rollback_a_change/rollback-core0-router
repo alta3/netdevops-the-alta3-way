@@ -1,0 +1,12 @@
+no ip nat inside source list 1 interface GigabitEthernet0/2 overload
+no access-list 1
+interface GigabitEthernet0/0
+no ip nat inside
+exit
+interface GigabitEthernet0/1
+no ip nat inside
+exit
+interface GigabitEthernet0/2
+no ip nat outside
+exit
+write memory
