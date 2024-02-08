@@ -1,0 +1,8 @@
+running_state: |
+  {{ running_state_content | indent(2) }}
+
+desired_state: |
+  {{ desired_state_content | indent(2) }}
+
+diff: |
+  {{ config_diff_content | indent(2) }}
