@@ -1,3 +1,4 @@
+```diff
 --- iosv-0 Configuration ---
 +++ iosv-1 Configuration ---
 @@ -1,6 +1,6 @@
@@ -84,3 +85,4 @@ ipv6 ioam timestamp
 no scheduler allocate
 !
 end
+```
