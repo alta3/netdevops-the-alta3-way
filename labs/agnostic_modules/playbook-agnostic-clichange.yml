@@ -1,0 +1,25 @@
+---
+- name: change switch configuration
+  hosts: edge_routers
+  gather_facts: false
+  become: yes # run the entire playbook as enable
+  connection: network_cli # required mode
+
+  tasks:
+
+    - name: load new configuration
+      cli_config:
+        config: "hostname {{ inventory_hostname }}"
+        backup: yes
+        backup_options:
+          filename: "{{ inventory_hostname }}.backup"
+          dir_path: "/home/student/"
+        notify:
+        - save and commit
+
+  handlers:
+    # handlers only run if a task runs that
+    # notifies the handler to run
+    - name: save and commit  # this name matches the notify
+      cli_command:
+        command: "{{save}}"
