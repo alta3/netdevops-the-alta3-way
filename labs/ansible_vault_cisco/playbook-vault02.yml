@@ -1,0 +1,14 @@
+---
+- name: Extra vars vault
+  connection: local
+  hosts: localhost
+  gather_facts: no
+
+  # reference the encrypted variable file
+  vars_files:
+    - vars/oscreds.yml
+
+  tasks:
+    - name: print out encrypted vars
+      ansible.builtin.debug:
+        msg: "{{ passwoidz }}"
