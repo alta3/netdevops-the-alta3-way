@@ -1,0 +1,48 @@
+- name: Build the topology in Cisco Modeling Labs
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    cml_host: "{{ lookup('env', 'CML_HOST') }}"
+    cml_username: "{{ lookup('env', 'CML_USERNAME') }}"
+    cml_password: "{{ lookup('env', 'CML_PASSWORD') }}"
+    cml_lab: "SSH ACCESS"
+    # URL of the topology file
+    cml_lab_url: "https://static.alta3.com/courses/mdd/ssh_accessible_topology.yaml"
+    # Path where the downloaded file should be saved
+    cml_lab_file: "/tmp/ssh_accessible_topology.yaml"
+    hereorthere: present
+
+  tasks:
+    # New task to download the lab file
+    - name: Download the CML lab file
+      ansible.builtin.get_url:
+        url: "{{ cml_lab_url }}"
+        dest: "{{ cml_lab_file }}"
+        force: yes # Ensures the file is downloaded even if it exists
+
+    # Check for the lab file
+    - name: Check for the lab file
+      ansible.builtin.stat:
+        path: "{{ cml_lab_file }}"
+      register: stat_result
+
+    # Assert that we have everything we need to connect to CML
+    - name: Assert necessary conditions for CML connection
+      ansible.builtin.assert:
+        that:
+          - stat_result.stat.exists
+          - cml_host != ""
+          - cml_username != ""
+          - cml_password != ""
+          - cml_lab != ""
+        msg: "CML host, credentials, and topology file are required. Verify the requirements in README are met."
+
+    - name: Manage the lab in CML
+      cisco.cml.cml_lab:
+        host: "{{ cml_host }}"
+        user: "{{ cml_username }}"
+        password: "{{ cml_password }}"
+        lab: "{{ cml_lab }}"
+        file: "{{ cml_lab_file }}"
+        state: "{{ hereorthere }}"
