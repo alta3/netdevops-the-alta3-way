@@ -1,0 +1,32 @@
+- name: Check initial topology connectivity
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  
+  vars:
+    cml_host: "{{ lookup('ansible.builtin.env', 'CML_HOST') }}"
+    cml_username: "{{ lookup('ansible.builtin.env', 'CML_USERNAME') }}"
+    cml_password: "{{ lookup('ansible.builtin.env', 'CML_PASSWORD') }}"
+    cml_lab: "{{ lookup('ansible.builtin.env', 'CML_LAB') }}"
+    
+  tasks:
+    - name: Get facts about a lab in CML
+      cisco.cml.cml_lab_facts:
+        host: "{{ cml_host }}"
+        user: "{{ cml_username }}"
+        password: "{{ cml_password }}"
+        lab: "{{ cml_lab }}"
+      register: results
+
+    - name: Pick out data and write it to a file
+      lineinfile:
+        path: node-data.txt
+        line: |
+          Node Name: {{ item.key }},
+          State: {{ item.value.state }},
+          Interfaces:
+          {{ item.value.interfaces | to_nice_yaml(indent=2) }}
+        create: yes
+      with_dict: "{{ results.cml_facts.nodes }}"
+      loop_control:
+        label: "{{ item.key }}"
