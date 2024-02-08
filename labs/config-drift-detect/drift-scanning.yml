@@ -1,0 +1,52 @@
+- hosts: scan-targets
+  gather_facts: no
+  vars:
+    drift_directory: "drift_detected"
+  tasks:
+    - name: Clone configuration repository from GitLab
+      git:
+        repo: 'https://gitlab.com/yourrepo/configurations.git'
+        dest: '/tmp/configurations'
+      delegate_to: localhost
+
+    - name: Fetch current router configuration
+      ios_command:
+        commands: "show running-config"
+      register: running_config
+
+    - name: Set running config content
+      set_fact:
+        running_state_content: "{{ running_config.stdout[0] }}"
+
+    - name: Fetch desired state configuration for the router
+      copy:
+        src: "/tmp/configurations/{{ hostvars[inventory_hostname].desired_state }}"
+        dest: "/tmp/desired_config.txt"
+      register: desired_config
+      delegate_to: localhost
+
+    - name: Set desired config content
+      set_fact:
+        desired_state_content: "{{ lookup('file', '/tmp/desired_config.txt') }}"
+
+    - name: Compare current config with desired state config
+      command: diff /tmp/desired_config.txt /tmp/current_config.txt
+      register: config_diff
+      failed_when: false
+      changed_when: false
+
+    - name: Set diff content
+      set_fact:
+        config_diff_content: "{{ config_diff.stdout | default('No differences found') }}"
+
+    - name: Create drift report directory
+      file:
+        path: "{{ drift_directory }}"
+        state: directory
+      delegate_to: localhost
+
+    - name: Write configuration drift to YAML file
+      template:
+        src: drift_template.j2
+        dest: "{{ drift_directory }}/{{ inventory_hostname }}.yml"
+      delegate_to: localhost
