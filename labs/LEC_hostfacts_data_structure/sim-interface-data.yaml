@@ -20,7 +20,7 @@
 
     - name: Pick out data and write it to a file
       lineinfile:
-        path: node-data.txt
+        path: ~/node-data.txt
         line: |
           Node Name: {{ item.key }},
           State: {{ item.value.state }},
