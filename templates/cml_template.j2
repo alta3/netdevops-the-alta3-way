@@ -1,0 +1,48 @@
+nodes:
+{%- for node in nodes %}
+  - boot_disk_size: null
+    {% if node.node_definition == 'external_connector' -%}
+    configuration: System Bridge
+    {%- else -%}
+    configuration: |-
+      {{ node.configuration }}
+    {%- endif %}
+    cpu_limit: 100
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n{{ loop.index0 }}
+    image_definition: null
+    label: {{ node.label }}
+    node_definition: {{ node.node_definition }}
+    ram: null
+    tags: []
+    x: {{ -200 - loop.index0 * 100 }}
+    y: -200     
+    interfaces:      
+    {%- for interface in node.interfaces %}
+      - id: i{{ loop.index0 }}
+        label: {{ interface.label }}
+        {% if interface.type != 'loopback' -%} 
+        slot: {{ interface.slot }} 
+        {% endif -%}        
+        type: {{ interface.type }} 
+{% endfor -%} 
+{% endfor -%}
+links:
+{%- for link in links %}
+  - id: l{{ loop.index0 }}
+    n1: {{ link.n1 }}
+    n2: {{ link.n2 }}
+    i1: {{ link.i1 }}
+    i2: {{ link.i2 }}
+    conditioning: {}
+    label: {{ link.label }}
+{%- endfor %}
+lab:
+  description: "Building the lab that we'll use for many labs."
+  notes: |-
+    "This was created by a combination effort between Spizz and Duck-E"
+  title: "Spizz-Lab"
+  version: "0.2.1"
+
