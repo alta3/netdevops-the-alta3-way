@@ -1,0 +1,16 @@
+---
+- name: Gather Network Device Information and Running Configurations
+  hosts: routers
+  gather_facts: no
+  tasks:
+    - name: Gather device facts
+      cisco.ios.ios_facts:
+        gather_subset: all
+      register: device_facts
+
+    - name: Save device facts to a file
+      delegate_to: localhost
+      copy:
+        content: "{{ device_facts | to_nice_json }}"
+        dest: "./facts/{{ inventory_hostname }}_facts.json"
+
