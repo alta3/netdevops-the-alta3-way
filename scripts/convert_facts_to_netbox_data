@@ -1,0 +1,117 @@
+# This script will convert raw fact files, gathered by the gather_info.yml playbook into data that NetBox understands via API call
+
+import json
+from pathlib import Path
+from ipaddress import ip_interface, ip_network
+
+def map_model_to_type_and_role(model):
+    """Map device model to NetBox device type and role."""
+    mapping = {
+        "IOSv": {"model": "Cisco ISR 4000", "role": "Router", "manufacturer": "Cisco"},
+        "IOSvL2": {"model": "Cisco Catalyst 9000", "role": "Switch", "manufacturer": "Cisco"},
+        "alpine": {"model": "Generic Linux Server", "role": "Server", "manufacturer": "Generic"}
+    }
+    return mapping.get(model, {"model": "Unknown", "role": "Unknown", "manufacturer": "Unknown"})
+
+def infer_cabling(devices_facts):
+    """Use ansible_net_neighbors to infer cabling with updated logic to prevent duplicate device-to-device connections."""
+    cables = []
+    seen_device_pairs = set()  # Track pairs of devices to prevent duplicates
+
+    for device_name, facts in devices_facts.items():
+        neighbors = facts.get("ansible_net_neighbors", {})
+        for interface, neigh_list in neighbors.items():
+            for neigh in neigh_list:
+                neigh_device = neigh.get("host").split('.')[0]  # Trimming domain name
+                # Create a sorted tuple of the device names to ensure uniqueness regardless of direction
+                device_pair = tuple(sorted([device_name, neigh_device]))
+                
+                if device_pair not in seen_device_pairs:
+                    cables.append({
+                        "side_a_device": device_name,
+                        "side_a_type": "device",
+                        "side_a_name": interface,
+                        "side_b_device": neigh_device,
+                        "side_b_type": "device",
+                        "side_b_name": neigh.get("port"),
+                    })
+                    seen_device_pairs.add(device_pair)
+
+    return cables
+
+
+def process_facts_to_netbox_format():
+    facts_dir = Path("facts/")
+    manufacturers_set = set()
+    device_roles_set = set()
+    device_types_set = set()
+    netbox_data = {
+        "sites": [{"name": "Alta3-Site", "slug": "alta3-site"}],
+        "manufacturers": [],
+        "device_roles": [],
+        "device_types": [],
+        "devices": [],
+        "configurations": [],
+        "interfaces": [],
+        "ip_addresses": [],
+        "cables": []
+    }
+    devices_facts = {}  # This will store device name to facts mapping
+
+    for fact_file in facts_dir.glob("*.json"):
+        with open(fact_file, 'r') as file:
+            facts = json.load(file)
+        device_facts = facts["ansible_facts"]
+        device_name = device_facts["ansible_net_hostname"]
+        devices_facts[device_name] = device_facts  # Store facts by device name
+
+        model = device_facts["ansible_net_model"]
+        type_and_role = map_model_to_type_and_role(model)
+
+        manufacturers_set.add(type_and_role["manufacturer"])
+        device_roles_set.add(type_and_role["role"])
+        device_types_set.add((type_and_role["model"], type_and_role["manufacturer"]))
+
+        device_entry = {
+            "name": device_name,
+            "device_type": {"model": type_and_role["model"]},
+            "site": {"name": "Alta3-Site"},
+            "role": {"name": type_and_role["role"]},
+            "manufacturer": {"name": type_and_role["manufacturer"]}
+        }
+        netbox_data["devices"].append(device_entry)
+        netbox_data["configurations"].append({"name": device_name, "template_code": device_facts["ansible_net_config"]})
+        # Process interfaces and IP addresses as before
+        for intf_name, intf_details in device_facts.get("ansible_net_interfaces", {}).items():
+            ipv4_addresses = [ip["address"] for ip in intf_details.get("ipv4", [])] if "ipv4" in intf_details else []
+            intf_entry = {
+                "device": {"name": device_name},
+                "name": intf_name,
+                "type": "1000base-t",
+                "ipv4_addresses": ipv4_addresses
+            }
+            netbox_data["interfaces"].append(intf_entry)
+
+            for ip_address in ipv4_addresses:
+                ip_cidr = str(ip_interface(f"{ip_address}/24").with_prefixlen)
+                netbox_data["ip_addresses"].append({
+                    "address": ip_cidr,
+                    "device": {"name": device_name},
+                    "interface": {"name": intf_name}
+                })
+
+    # Use the new infer_cabling function
+    inferred_cables = infer_cabling(devices_facts)
+    netbox_data["cables"] = inferred_cables
+
+    # Convert sets to lists for JSON serialization
+    netbox_data["manufacturers"] = [{"name": m, "slug": m.lower().replace(" ", "-")} for m in manufacturers_set]
+    netbox_data["device_roles"] = [{"name": r.capitalize(), "slug": r.lower().replace(" ", "-")} for r in device_roles_set]
+    netbox_data["device_types"] = [{"model": t[0], "slug": t[0].lower().replace(" ", "-"), "manufacturer": {"name": t[1]}} for t in device_types_set]
+
+    with open("netbox_data_final.json", 'w') as file:
+        json.dump(netbox_data, file, indent=4)
+
+if __name__ == "__main__":
+    process_facts_to_netbox_format()
+
