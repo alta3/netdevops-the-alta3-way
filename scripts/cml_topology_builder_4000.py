@@ -1,3 +1,5 @@
+# After you have a NetBox Instance filled, this script will create an importable CML topology. 
+
 import os
 import requests
 from jinja2 import Environment, FileSystemLoader
@@ -110,7 +112,7 @@ def render_topology_template(devices, links):
     Renders the topology using the Jinja2 template with the given devices and links data.
     """
     env = Environment(loader=FileSystemLoader('templates'))
-    template = env.get_template('cml_template.j2')
+    template = env.get_template('topology_template.j2')
     
     # Pass both devices and links to the template
     rendered_topology = template.render(nodes=devices, links=links)
