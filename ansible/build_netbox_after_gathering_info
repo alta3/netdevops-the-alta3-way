@@ -1,0 +1,166 @@
+# After you gather info from you CML production lab (or us gather facts on your general network) and sanitize the data. This will push it in. 
+
+---
+- name: Populate NetBox with Dynamic Data from JSON
+  hosts: localhost
+  gather_facts: no
+  vars:
+    netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+    netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+    headers:
+      Authorization: "Token {{ netbox_token }}"
+      Content-Type: "application/json"
+    netbox_data: "{{ lookup('file', 'netbox_data_final.json') | from_json }}"
+    construct_cable: >
+      {{
+        lambda x: {
+          'termination_a_type': 'dcim.interface',
+          'termination_a_id': interface_map[x.side_a_device + '.' + x.side_a_name],
+          'termination_b_type': 'dcim.interface',
+          'termination_b_id': interface_map[x.side_b_device + '.' + x.side_b_name]
+        }
+      }}
+  tasks:
+    - name: Create or Update Sites
+      uri:
+        url: "{{ netbox_url }}/api/dcim/sites/"
+        method: POST
+        headers: "{{ headers }}"
+        body_format: json
+        body: "{{ item | to_json }}"
+        status_code: [201, 400]
+      loop: "{{ netbox_data.sites }}"
+
+    - name: Create or Update Manufacturers
+      uri:
+        url: "{{ netbox_url }}/api/dcim/manufacturers/"
+        method: POST
+        headers: "{{ headers }}"
+        body_format: json
+        body: "{{ item | to_json }}"
+        status_code: [201, 400]
+      loop: "{{ netbox_data.manufacturers }}"
+
+    - name: Create or Update Device Roles
+      uri:
+        url: "{{ netbox_url }}/api/dcim/device-roles/"
+        method: POST
+        headers: "{{ headers }}"
+        body_format: json
+        body: "{{ item | to_json }}"
+        status_code: [201, 400]
+      loop: "{{ netbox_data.device_roles }}"
+
+    - name: Create or Update Device Types
+      uri:
+        url: "{{ netbox_url }}/api/dcim/device-types/"
+        method: POST
+        headers: "{{ headers }}"
+        body_format: json
+        body: "{{ item | to_json }}"
+        status_code: [201, 400]
+      loop: "{{ netbox_data.device_types }}"
+
+    - name: Create or Update Devices
+      uri:
+        url: "{{ netbox_url }}/api/dcim/devices/"
+        method: POST
+        headers: "{{ headers }}"
+        body_format: json
+        body: "{{ item | to_json }}"
+        status_code: [201, 400]
+      loop: "{{ netbox_data.devices }}"
+
+    - name: Create Interfaces
+      uri:
+        url: "{{ netbox_url }}/api/dcim/interfaces/"
+        method: POST
+        headers: "{{ headers }}"
+        body_format: json
+        body: "{{ item | to_json }}"
+        status_code: [201, 400]
+      loop: "{{ netbox_data.interfaces }}"
+
+    - name: Assign IP Addresses to Interfaces 
+      netbox.netbox.netbox_ip_address:
+        netbox_url: "{{ netbox_url }}"
+        netbox_token: "{{ netbox_token }}"
+        data:
+          address: "{{ item.address }}"
+          assigned_object:
+            device: "{{ item.device.name }}"
+            name: "{{ item.interface.name }}"
+          status: active
+        state: present
+      loop: "{{ netbox_data.ip_addresses }}"
+    
+    - name: Add Config Templates
+      uri:
+        url: "{{ netbox_url }}/api/extras/config-templates/"
+        method: POST
+        headers: "{{ headers }}"
+        body_format: json
+        body: "{{ item | to_json }}"
+        status_code: [201, 400]
+      loop: "{{ netbox_data.configurations }}"    
+        
+    # For cables, we need to fetch interface IDs due to API constraints
+
+    # Previous tasks for creating sites, devices, etc., go here...
+
+    - name: Fetch Device IDs
+      uri:
+        url: "{{ netbox_url }}/api/dcim/devices/?name={{ item }}"
+        method: GET
+        headers: "{{ headers }}"
+        return_content: yes
+      register: device_fetch
+      loop: "{{ netbox_data.devices | map(attribute='name') | list }}"
+      changed_when: false
+
+    - name: Set Device IDs
+      set_fact:
+        device_ids: "{{ device_ids | default({}) | combine({ item['item']: (item['json']['results'] | first).id }) }}"
+      loop: "{{ device_fetch.results }}"
+      when: item.json.results | length > 0
+
+    - name: Fetch Interface IDs
+      uri:
+        url: "{{ netbox_url }}/api/dcim/interfaces/?device_id={{ device_ids[item.device.name] }}&name={{ item.name }}"
+        method: GET
+        headers: "{{ headers }}"
+        return_content: yes
+      register: interface_fetch
+      loop: "{{ netbox_data.interfaces }}"
+      changed_when: false
+
+    - name: Set Interface IDs
+      set_fact:
+        interface_ids: "{{ interface_ids | default({}) | combine({ item['item']['device']['name'] + '.' + item['item']['name']: (item['json']['results'] | first).id }) }}"
+      loop: "{{ interface_fetch.results }}"
+      when: item.json.results | length > 0
+
+    - name: Construct Cable Data
+      set_fact:
+        constructed_connections: "{{ constructed_connections | default([]) + [construct_cable_item] }}"
+      vars:
+        construct_cable_item:
+          type: "cat3"
+          a_terminations:
+            - object_type: "dcim.interface"
+              object_id: "{{ interface_ids[item.side_a_device + '.' + item.side_a_name] | int }}"
+          b_terminations:
+            - object_type: "dcim.interface"
+              object_id: "{{ interface_ids[item.side_b_device + '.' + item.side_b_name] | int }}"
+          status: "connected"
+          # Add additional fields as needed
+      loop: "{{ netbox_data.cables }}"
+
+    - name: Create Cables
+      uri:
+        url: "{{ netbox_url }}/api/dcim/cables/"
+        method: POST
+        body: "{{ item | to_json }}"
+        headers: "{{ headers }}"
+        status_code: 201
+      loop: "{{ constructed_connections }}"
