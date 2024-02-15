@@ -5,7 +5,7 @@ nodes:
     configuration: System Bridge
     {%- else -%}
     configuration: |-
-      {{ node.configuration }}
+      {{ node.configuration | indent(6,false) }}   
     {%- endif %}
     cpu_limit: 100
     cpus: null
