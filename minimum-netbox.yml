@@ -366,15 +366,20 @@
       register: ip_address_check
       changed_when: false
       ignore_errors: yes
-    - name: Assign IP Addresses to Interfaces
-      uri:
-        url: "{{ netbox_url }}/api/ipam/ip-addresses/"
-        method: POST
-        body: "{{ item | to_json }}"
-        headers: "{{ headers }}"
-        status_code: 201
+
+    - name: Assign IP Addresses to Interfaces 
+      netbox.netbox.netbox_ip_address:
+        netbox_url: "{{ netbox_url }}"
+        netbox_token: "{{ netbox_token }}"
+        data:
+          address: "{{ item.address }}"
+          assigned_object:
+            device: "{{ item.device.name }}"
+            name: "{{ item.interface }}"
+          status: active
+        state: present
       loop: "{{ ip_addresses }}"
-      when: "ip_address_check.json.count == 0"
+    
     - name: Check if Cables Exist
       uri:
         url: "{{ netbox_url }}/api/dcim/cables/"
