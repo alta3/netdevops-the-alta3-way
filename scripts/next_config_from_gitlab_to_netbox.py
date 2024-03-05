@@ -67,7 +67,6 @@ headers = {
     'Accept': 'application/json',
 }
 data = {
-    # Assuming the structure needed by NetBox, this part might need adjustments
     "name": f"{hostname}",
     "template_code": config_data,  # Ensure this is a string, not bytes
     # Add other necessary fields as required by your NetBox setup
