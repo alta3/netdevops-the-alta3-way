@@ -2,7 +2,10 @@ import gitlab
 import os
 import json
 
-# This script expects  that you have: # 1) A Gitlab Repo to hold the configuarions that has been cloned to your machine # 2) A personal access token to that gitlab repo that has been saved as env GL_TOKEN # 3) Updated the REPO_ID variable on line 16 to point to your gitlab repo 
+# This script expects  that you have: 
+# 1) A Gitlab Repo to hold the configuarions that has been cloned to your machine 
+# 2) A personal access token to that gitlab repo that has been saved as env GL_TOKEN 
+# 3) Updated the REPO_ID variable on line 16 to point to your gitlab repo 
 # 4) A facts directory holding the facts .json files that is located in the parent directory to the Gitlab Repo directory 
 # 5) This script in the Gitlab Repo directory
 
