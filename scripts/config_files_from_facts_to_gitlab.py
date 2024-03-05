@@ -18,6 +18,20 @@ REPO_ID = "JoeSpizz/router-config-demo"  # Found in the project's homepage URL
 gl = gitlab.Gitlab(GL_URL, private_token=GL_TOKEN)
 project = gl.projects.get(REPO_ID)
 
+def create_additional_files(hostname):
+    # List of additional files to create
+    additional_files = ["next_config", "test_config", "change.txt", "rollback.txt"]
+
+    for file_name in additional_files:
+        file_path = f"router-configs/{hostname}/{file_name}"
+        data = {
+        'file_path': file_path,
+        'branch': 'main',
+        'content': '', # Empty content for new files
+        'commit_message': f'Create empty {file_name} for {hostname}'
+        }
+        project.files.create(data)
+
 def process_json_files(directory):
     for filename in os.listdir(directory):
         if filename.endswith(".json"):
@@ -28,7 +42,7 @@ def process_json_files(directory):
                 net_config = data['ansible_facts'].get('ansible_net_config')
                 # File path in the repo, including hostname as a directory
                 file_path = f"router-configs/{hostname}/current_config"
-    
+
                 try:
                     # Try to get the file if it exists
                     file = project.files.get(file_path=file_path, ref='main')
@@ -36,13 +50,15 @@ def process_json_files(directory):
                     file.save(branch='main', commit_message=f'Update config for {hostname}')
                 except gitlab.exceptions.GitlabGetError:
                     # If the file doesn't exist, create a new one
-                    data = { 
+                    data = {
                         'file_path': file_path,
                         'branch': 'main',
                         'content': net_config,
                         'commit_message': f'Create config for {hostname}'
-                    }   
+                    }
                     project.files.create(data)
+                    create_additional_files(hostname)
+
 
 if __name__ == "__main__":
     process_json_files('../facts/')
