@@ -7,7 +7,7 @@ import base64
 # 1) A Gitlab Repo to hold the configuarions that has been cloned to your machine 
 # 2) A personal access token to that gitlab repo that has been saved as env GL_TOKEN
 # 3) env's set for NETBOX_URL and NETBOX_TOKEN
-# 4) Updated the REPO_ID variable on line 18 to point to your gitlab repo 
+# 4) Updated the REPO_ID variable on line 19 to point to your gitlab repo 
 # 5) A facts directory holding the facts .json files that is located in the parent directory to the Gitlab Repo directory 
 # 6) This script in the Gitlab Repo directory
 
@@ -34,6 +34,21 @@ def find_template_by_name(hostname):
     if response.status_code == 200 and response.json()['count'] > 0:
         return response.json()['results'][0]  # Return the first matching template
     return None
+
+def update_gitlab_file(repo, file_path, content, commit_message):
+    """Update or create a file in GitLab repository."""
+    try:
+        file = repo.files.get(file_path=file_path, ref='main')
+        file.content = content
+        file.save(branch='main', commit_message=commit_message)
+    except gitlab.exceptions.GitlabGetError:
+        # If the file does not exist, create it
+        repo.files.create({
+            'file_path': file_path,
+            'branch': 'main',
+            'content': content,
+            'commit_message': commit_message
+        })
 
 # GitLab retrieval
 file_path = f"router-configs/{hostname}/next_config"
@@ -70,5 +85,13 @@ else:
 
 if response.status_code in [200, 201, 204]:
     print("Configuration successfully uploaded to NetBox.")
+    current_config_path = f"router-configs/{hostname}/current_config"
+    update_gitlab_file(project, current_config_path, config_data, f"Update current_config for {hostname}")
+
+    # Blank out specified files
+    for file_name in ["next_config", "test_config", "change.txt", "rollback.txt"]:
+        file_path = f"router-configs/{hostname}/{file_name}"
+        update_gitlab_file(project, file_path, '', f"Reset {file_name} for {hostname}")
+    print("gitlab auxillary files reset")
 else:
     print(f"Failed to upload configuration to NetBox: {response.text}")
