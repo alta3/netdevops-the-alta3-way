@@ -23,6 +23,8 @@
         slug: "switch"
       - name: "Server"
         slug: "server"
+      - name: "Network-Bridge"
+        slug: "network-bridge"
     device_types:
       - model: "Cisco ISR 4000"
         slug: "cisco-isr-4000"
@@ -92,7 +94,7 @@
         site:
           name: "Alta3-Site"
         role:
-          name: "Server"
+          name: "Network-Bridge"
     interfaces:
       - device:
           name: "edge-1"
