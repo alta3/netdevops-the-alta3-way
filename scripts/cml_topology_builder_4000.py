@@ -103,9 +103,10 @@ def map_device_type_to_node_definition(device_role):
     mappings = {
         'Router': 'iosv',       
         'Switch': 'iosvl2',     
-        'Server': 'alpine',     
+        'Server': 'alpine', 
+        'Network-Bridge':'external_connector'
     }
-    return mappings.get(device_role, 'external_connector')  # Default to 'External Connector'
+    return mappings.get(device_role)  # Default to 'External Connector'
 
 def render_topology_template(devices, links):
     """
