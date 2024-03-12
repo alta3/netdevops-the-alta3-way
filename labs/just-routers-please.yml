@@ -8,7 +8,7 @@
     cml_host: "{{ lookup('ansible.builtin.env', 'CML_HOST') }}" #192.168.4.149
     cml_username: "{{ lookup('ansible.builtin.env', 'CML_USERNAME') }}" # admin
     cml_password: "{{ lookup('ansible.builtin.env', 'CML_PASSWORD') }}"
-    cml_lab: "{{ lookup('ansible.builtin.env', 'CML_LAB') }}" #workdammit
+    cml_lab: "{{ lookup('ansible.builtin.env', 'CML_LAB') }}"
   
   
   tasks:
