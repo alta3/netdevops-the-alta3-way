@@ -17,10 +17,9 @@ NETBOX_TOKEN = os.getenv('NETBOX_TOKEN')
 GL_TOKEN = os.getenv('GL_TOKEN')
 GL_URL = "https://gitlab.com"
 REPO_ID = "JoeSpizz/router-config-demo"
-# Path to your inventory file and the playbook
-inventory_path = "/path/to/your/inventory.ini"
-playbook_path = "/path/to/your/push_changes_playbook.yml"
-ssh_config_path = "/path/to/your/.ssh/config"
+inventory_path = os.path.join(script_dir, "inventory.ini")
+playbook_path = os.path.join(script_dir, "push_changes_playbook.yml")
+ssh_config_path = os.path.expanduser("~/.ssh/config")
 
 # Initialize GitLab
 gl = gitlab.Gitlab(GL_URL, private_token=GL_TOKEN)
