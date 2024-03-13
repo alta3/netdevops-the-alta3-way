@@ -1,0 +1,6 @@
+export CML_HOST="10.0.0.80"
+export CML_USERNAME="admin"
+export CML_PASSWORD="Alta3isgreatftw!"
+export CML_LAB_FILE="$HOME/topo.yaml"
+export CML_VERIFY_CERT="false"
+export CML_LAB="Ansible Created Basic Network"
