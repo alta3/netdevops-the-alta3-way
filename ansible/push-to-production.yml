@@ -3,19 +3,19 @@
   hosts: "{{ target }}"
   gather_facts: no
   vars:
-    changes_file_path: "./router-configs/{{ target }}/change.txt"
+    changes_file_path: "./{{ target }}/change.txt"
 
   tasks:
-    - name: Check if changes.txt exists
+    - name: Check if change.txt exists
       ansible.builtin.stat:
         path: "{{ changes_file_path }}"
       register: changes_file
 
-    - name: Apply configuration from changes.txt if it exists
+    - name: Apply configuration from change.txt if it exists
       when: changes_file.stat.exists
       cisco.ios.ios_config:
         src: "{{ changes_file_path }}"
-      notify: 
+      notify:
         - Show push result
 
   handlers:
