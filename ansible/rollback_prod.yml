@@ -1,0 +1,24 @@
+---
+- name: Push Configuration Rollback to Network Device
+  hosts: "{{ target }}"
+  gather_facts: no
+  vars:
+    rollback_file_path: "./{{ target }}/rollback.txt"
+
+  tasks:
+    - name: Check if change.txt exists
+      ansible.builtin.stat:
+        path: "{{ rollback_file_path }}"
+      register: rollback_file
+
+    - name: Apply configuration from change.txt if it exists
+      when: rollback_file.stat.exists
+      cisco.ios.ios_config:
+        src: "{{ rollback_file_path }}"
+      notify:
+        - Show push result
+
+  handlers:
+    - name: Show push result
+      debug:
+        msg: "Configuration pushed successfully."
