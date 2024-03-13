@@ -3,7 +3,7 @@
   hosts: "{{ target }}"
   gather_facts: no
   vars:
-    changes_file_path: "{{ playbook_dir }}/router-configs/{{ inventory_hostname }}/change.txt"
+    changes_file_path: "./router-configs/{{ target }}/change.txt"
 
   tasks:
     - name: Check if changes.txt exists
