@@ -2,6 +2,7 @@ import requests
 import os
 import gitlab
 import base64
+import subprocess
 
 # This script expects  that you have: 
 # 1) A Gitlab Repo to hold the configuarions that has been cloned to your machine 
@@ -16,6 +17,10 @@ NETBOX_TOKEN = os.getenv('NETBOX_TOKEN')
 GL_TOKEN = os.getenv('GL_TOKEN')
 GL_URL = "https://gitlab.com"
 REPO_ID = "JoeSpizz/router-config-demo"
+# Path to your inventory file and the playbook
+inventory_path = "/path/to/your/inventory.ini"
+playbook_path = "/path/to/your/push_changes_playbook.yml"
+ssh_config_path = "/path/to/your/.ssh/config"
 
 # Initialize GitLab
 gl = gitlab.Gitlab(GL_URL, private_token=GL_TOKEN)
@@ -23,6 +28,20 @@ project = gl.projects.get(REPO_ID)
 
 # User input for hostname
 hostname = input("Enter the device hostname: ")
+
+def execute_ansible_playbook(hostname, inventory_path, playbook_path, ssh_config_path):
+    command = [
+        "ansible-playbook",
+        "-i", inventory_path,
+        "-e", f"target={hostname}",
+        "--ssh-common-args='-F {ssh_config_path}'",
+        playbook_path
+    ]
+    try:
+        result = subprocess.run(command, check=True, capture_output=True, text=True)
+        print(f"Ansible playbook executed successfully: {result.stdout}")
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to execute Ansible playbook: {e.stderr}")
 
 def find_template_by_name(hostname):
     """Search for an existing template by hostname."""
@@ -72,7 +91,7 @@ data = {
 }
 
 existing_template = find_template_by_name(hostname)
-
+execute_ansible_playbook(hostname, inventory_path, playbook_path, ssh_config_path)
 if existing_template:
     # Existing template found, patch it
     response = requests.patch(f"{NETBOX_URL}/api/extras/config-templates/{existing_template['id']}/",
