@@ -8,8 +8,7 @@ import base64
 # 2) A personal access token to that gitlab repo that has been saved as env GL_TOKEN
 # 3) env's set for NETBOX_URL and NETBOX_TOKEN
 # 4) Updated the REPO_ID variable on line 19 to point to your gitlab repo 
-# 5) A facts directory holding the facts .json files that is located in the parent directory to the Gitlab Repo directory 
-# 6) This script in the Gitlab Repo directory
+# 5) This script in the Gitlab Repo directory
 
 # Load environment variables
 NETBOX_URL = os.getenv('NETBOX_URL')
