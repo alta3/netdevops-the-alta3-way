@@ -17,6 +17,7 @@ NETBOX_TOKEN = os.getenv('NETBOX_TOKEN')
 GL_TOKEN = os.getenv('GL_TOKEN')
 GL_URL = "https://gitlab.com"
 REPO_ID = "JoeSpizz/router-config-demo"
+script_dir = os.path.dirname(os.path.abspath(__file__))
 inventory_path = os.path.join(script_dir, "inventory.ini")
 playbook_path = os.path.join(script_dir, "push_changes_playbook.yml")
 ssh_config_path = os.path.expanduser("~/.ssh/config")
@@ -90,7 +91,6 @@ data = {
 }
 
 existing_template = find_template_by_name(hostname)
-execute_ansible_playbook(hostname, inventory_path, playbook_path, ssh_config_path)
 if existing_template:
     # Existing template found, patch it
     response = requests.patch(f"{NETBOX_URL}/api/extras/config-templates/{existing_template['id']}/",
@@ -101,6 +101,7 @@ else:
 
 if response.status_code in [200, 201, 204]:
     print("Configuration successfully uploaded to NetBox.")
+    execute_ansible_playbook(hostname, inventory_path, playbook_path, ssh_config_path)
     current_config_path = f"router-configs/{hostname}/current_config"
     update_gitlab_file(project, current_config_path, config_data, f"Update current_config for {hostname}")
 
