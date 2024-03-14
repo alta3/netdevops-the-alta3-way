@@ -53,30 +53,50 @@ def find_template_by_name(hostname):
         return response.json()['results'][0]  # Return the first matching template
     return None
 
-def update_gitlab_file(repo, file_path, content, commit_message):
-    """Update or create a file in GitLab repository."""
+def get_current_branch():
     try:
-        file = repo.files.get(file_path=file_path, ref='main')
+        result = subprocess.run(["git", "branch", "--show-current"], check=True, capture_output=True, text=True)
+        return result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to get current branch: {e.stderr}")
+        return None
+
+def update_gitlab_file(repo, file_path, content, commit_message):
+    current_branch = get_current_branch()  # Get the current branch name
+    if not current_branch:
+        print("Failed to identify current git branch, defaulting to 'main'")
+        current_branch = 'main'  # Fallback to 'main' if the branch name can't be determined
+    
+    try:
+        file = repo.files.get(file_path=file_path, ref=current_branch)
         file.content = content
-        file.save(branch='main', commit_message=commit_message)
+        file.save(branch=current_branch, commit_message=commit_message)
     except gitlab.exceptions.GitlabGetError:
         # If the file does not exist, create it
         repo.files.create({
             'file_path': file_path,
-            'branch': 'main',
+            'branch': current_branch,
             'content': content,
             'commit_message': commit_message
         })
 
 # GitLab retrieval
+# Determine the current git branch
+current_branch = get_current_branch()
+if not current_branch:
+    print("Failed to identify current git branch, defaulting to 'main'")
+    current_branch = 'main'  # Fallback to 'main' if the branch name can't be determined
+
 file_path = f"router-configs/{hostname}/next_config"
 try:
-    file = project.files.get(file_path=file_path, ref='main')
+    # Adjust the ref parameter to use current_branch instead of 'main'
+    file = project.files.get(file_path=file_path, ref=current_branch)
     # Decode the file content from bytes to string
     config_data = base64.b64decode(file.content).decode('utf-8')
 except gitlab.exceptions.GitlabGetError:
     print(f"Failed to retrieve configuration for {hostname}")
     exit(1)
+
 
 # NetBox API push - Ensure the data dictionary is correctly formed for JSON serialization
 headers = {
