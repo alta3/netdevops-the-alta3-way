@@ -3,8 +3,8 @@
   hosts: localhost
   gather_facts: no
   vars:
-    netbox_url: "{{ lookup('env', 'NB_API_URL') }}"
-    netbox_token: "{{ lookup('env', 'NB_API_TOKEN') }}"      
+    netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+    netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"  
     headers:
       Authorization: "Token {{ netbox_token }}"
       Content-Type: "application/json"
@@ -23,6 +23,8 @@
         slug: "switch"
       - name: "Server"
         slug: "server"
+      - name: "Network-Bridge"
+        slug: "network-bridge"
     device_types:
       - model: "Cisco ISR 4000"
         slug: "cisco-isr-4000"
@@ -92,7 +94,7 @@
         site:
           name: "Alta3-Site"
         role:
-          name: "Server"
+          name: "Network-Bridge"
     interfaces:
       - device:
           name: "edge-1"
@@ -366,15 +368,20 @@
       register: ip_address_check
       changed_when: false
       ignore_errors: yes
-    - name: Assign IP Addresses to Interfaces
-      uri:
-        url: "{{ netbox_url }}/api/ipam/ip-addresses/"
-        method: POST
-        body: "{{ item | to_json }}"
-        headers: "{{ headers }}"
-        status_code: 201
+
+    - name: Assign IP Addresses to Interfaces 
+      netbox.netbox.netbox_ip_address:
+        netbox_url: "{{ netbox_url }}"
+        netbox_token: "{{ netbox_token }}"
+        data:
+          address: "{{ item.address }}"
+          assigned_object:
+            device: "{{ item.device.name }}"
+            name: "{{ item.interface }}"
+          status: active
+        state: present
       loop: "{{ ip_addresses }}"
-      when: "ip_address_check.json.count == 0"
+    
     - name: Check if Cables Exist
       uri:
         url: "{{ netbox_url }}/api/dcim/cables/"
@@ -399,6 +406,7 @@
       loop: "{{ device_fetch.results }}"
       when: item.json.results | length > 0
 
+    # Fetch and print Interface IDs
     - name: Fetch Interface IDs
       uri:
         url: "{{ netbox_url }}/api/dcim/interfaces/?device_id={{ device_ids[item.device.name] }}&name={{ item.name }}"
