@@ -126,7 +126,7 @@ if response.status_code in [200, 201, 204]:
     update_gitlab_file(project, current_config_path, config_data, f"Update current_config for {hostname}")
 
     # Blank out specified files
-    for file_name in ["next_config", "test_config", "change.txt", "rollback.txt"]:
+    for file_name in ["next_config", "test_config", "change.txt"]:
         file_path = f"router-configs/{hostname}/{file_name}"
         update_gitlab_file(project, file_path, '', f"Reset {file_name} for {hostname}")
     print("gitlab auxillary files reset")
