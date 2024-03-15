@@ -41,10 +41,12 @@ echo "7. Switch back to your TMUX"
 echo "....................................."
 echo "....................................."
 
-read -p "Press Enter to continue, above are the steps you need to take when the script runs..."
+read -p "Press Enter to continue, above are the steps you need to take when netbox_reset.py runs..."
 
+echo
 echo "When you see the prompt 'Enter the new NetBox API token:'"
 echo "paste the token in that you copied from netbox and hit enter."
+echo
 read -p "Press Enter to continue... The script will now execute!"
 
 python3 ~/netbox_reset.py
