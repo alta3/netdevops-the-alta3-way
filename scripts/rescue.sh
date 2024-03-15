@@ -43,10 +43,11 @@ echo "....................................."
 
 read -p "Press Enter to continue, above are the steps you need to take when netbox_reset.py runs..."
 
-echo
+printf "\n"
 echo "When you see the prompt 'Enter the new NetBox API token:'"
 echo "paste the token in that you copied from netbox and hit enter."
-echo
+printf "\n"
+
 read -p "Press Enter to continue... The script will now execute!"
 
 python3 ~/netbox_reset.py
