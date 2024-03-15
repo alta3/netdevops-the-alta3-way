@@ -8,8 +8,24 @@ if [[ -z "$NETBOX_URL" ]]; then
     exit 1
 else
     # NETBOX_URL var is set
-    echo "NETBOX_URL is set to: $NETBOX_URL"
+    echo -e "NETBOX_URL is set to: \n$NETBOX_URL"
+    printf "\n"
 fi
+
+url_set_to=$NETBOX_URL
+sleep 2
+
+# Regular expression pattern to match the URL format
+expected_pattern="^https://netbox-[[:alnum:]-]+\.live\.alta3\.com$"
+
+if [[ $url_set_to =~ $expected_pattern ]]; then
+    echo "URL is in the correct format, continuing.."
+else
+    echo "URL does not match the expected format."
+    echo "Run export NETBOX_URL=https://netbox-$(hostname -d).live.alta3.com"
+    echo "and try the rescue.sh script once more."
+fi
+sleep 2
 
 # Install necessary requirements for resetting netbox
 python3 -m pip install paramiko
@@ -41,7 +57,7 @@ echo "7. Switch back to your TMUX"
 echo "....................................."
 echo "....................................."
 
-read -p "Press Enter to continue, above are the steps you need to take when netbox_reset.py runs..."
+read -p "Press Enter to continue, above are the steps you need to take when the script runs..."
 
 printf "\n"
 echo "When you see the prompt 'Enter the new NetBox API token:'"
@@ -49,5 +65,6 @@ echo "paste the token in that you copied from netbox and hit enter."
 printf "\n"
 
 read -p "Press Enter to continue... The script will now execute!"
+
 
 python3 ~/netbox_reset.py
