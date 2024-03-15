@@ -1,0 +1,24 @@
+---
+- name: Gather CML Lab Facts
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+  - name: Gather CML Lab Facts
+    cisco.cml.cml_lab_facts:
+      host: "{{ cml_host }}"
+      user: "{{ cml_username }}"
+      password: "{{ cml_password }}"
+      lab: "{{ cml_lab }}"
+    register: cml_lab_facts
+
+  - name: Print CML Lab Facts
+    debug:
+      var: cml_lab_facts
+
+  - name: Write CML LAB Facts output to a file
+    copy:
+      content: "{{cml_lab_facts | to_nice_json }}"
+      dest: "~/cml_facts.json"
+    delegate_to: localhost
+    run_once: true
